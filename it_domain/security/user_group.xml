@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="it_domain_admin" model="res.groups">
+            <field name="name">Domain Administrator</field>
+            <field name="category_id" ref="it_base.module_category_it_infrastructure"/>
+            <field name="sequence">2</field>
+        </record>
+    </data>
+</openerp>
+
