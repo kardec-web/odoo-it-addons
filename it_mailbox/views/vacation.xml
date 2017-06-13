@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="it_mailbox_vacation_tree" model="ir.ui.view">
+			<field name="name">it.mailbox.vacation.tree</field>
+			<field name="model">it.mailbox.vacation</field>
+			<field name="arch" type="xml">
+				<tree string="Vacations">
+					<field name="name"/>
+					<field name="mailbox"/>
+					<field name="alias"/>
+					<field name="state"/>
+					<field name="active_from"/>
+					<field name="active_until"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="it_mailbox_vacation_form" model="ir.ui.view">
+			<field name="name">it.mailbox.vacation.form</field>
+			<field name="model">it.mailbox.vacation</field>
+			<field name="arch" type="xml">
+			<form string="Vacation">
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" default_focus="1" placeholder="Subject" />
+						</h1>
+					</div>
+					<group>
+						<field name="state"/>
+						<field name="domain"/>
+						<field name="from_mailbox"/>
+						<field name="mailbox" attrs="{'invisible': [('from_mailbox', '=', False)]}" options="{'no_quick_create':True,'create_edi':False}"/>
+						<field name="alias" attrs="{'invisible': [('from_mailbox', '=', True)]}" options="{'no_quick_create':True,'create_edi':False}"/>
+						<field name="active_from"/>
+						<field name="active_until"/>
+						<field name="body"/>
+					</group>
+				</sheet>
+			</form>
+			</field>
+		</record>
+
+		<record id="it_mailbox_vacation_search" model="ir.ui.view">
+			<field name="name">it.mailbox.vacation.search</field>
+			<field name="model">it.mailbox.vacation</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="state"/>
+					<field name="mailbox"/>
+					<field name="alias"/>
+					<field name="active_from"/>
+					<field name="active_until"/>
+
+					<filter name="state_pending" string="Pending" domain="[('state', '=', 'pending')]"/>
+					<filter name="state_active" string="Active" domain="[('state', '=', 'active')]"/>
+					<filter name="state_expired" string="Expired" domain="[('state', '=', 'expired')]"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="it_mailbox_vacation_action" model="ir.actions.act_window">
+			<field name="name">Vacations</field>
+			<field name="res_model">it.mailbox.vacation</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Create a new vacation</p>
+			</field>
+		</record>
+
+		<menuitem id="it_menu_mailbox_vacations" action="it_mailbox_vacation_action" name="Vacations" parent="it_menu_mailbox" sequence="4"/>
+
+	</data>
+</openerp>

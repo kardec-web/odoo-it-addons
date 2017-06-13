@@ -1,0 +1,13 @@
+"id","name","model_id/id","group_id/id","perm_read","perm_write","perm_create","perm_unlink"
+"it_mailbox_alias_manager","Infrastructure Administrator","model_it_mailbox_alias","it_base.it_admin",1,1,1,1
+"it_mailbox_alias_mailbox_manager","Mailbox Administrator","model_it_mailbox_alias","it_mailboxes_admin",1,1,1,1
+"it_mailbox_alias_read_all","Domain All","model_it_mailbox_alias",,1,0,0,0
+"it_mailbox_alias_public","Domain Public","model_it_mailbox_alias","base.group_public",1,0,0,0
+"it_mailbox_manager","Infrastructure Administrator","model_it_mailbox","it_base.it_admin",1,1,1,1
+"it_mailbox_mailbox_manager","Mailbox Administrator","model_it_mailbox","it_mailboxes_admin",1,1,1,1
+"it_mailbox_read_all","Domain All","model_it_mailbox",,1,0,0,0
+"it_mailbox_public","Domain Public","model_it_mailbox","base.group_public",1,0,0,0
+"it_mailbox_vacation_manager","Vacation Infrastructure Administrator","model_it_mailbox_vacation","it_base.it_admin",1,1,1,1
+"it_mailbox_vacation_mailbox_manager","Vacation Mailbox Administrator","model_it_mailbox_vacation","it_mailboxes_admin",1,1,1,1
+"it_mailbox_vacation_read_all","Vacation All","model_it_mailbox_vacation",,1,0,0,0
+"it_mailbox_vacation_public","Vacation Public","model_it_mailbox_vacation","base.group_public",1,0,0,0
