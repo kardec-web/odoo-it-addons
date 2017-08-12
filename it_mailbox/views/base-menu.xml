@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-	<data>
-		<menuitem id="it_menu_mailbox" name="Mailboxes" parent="it_base.main_it_menu" sequence="2"/>
-	</data>
-</openerp>
+<odoo>
+    <menuitem id="it_menu_mailbox" name="Mailboxes" parent="it_base.main_it_menu" sequence="2"/>
+</odoo>

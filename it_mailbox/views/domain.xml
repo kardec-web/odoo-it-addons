@@ -1,75 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-	<data>
-		
-		<record model="ir.ui.view" id="it_domain_tree">
-			<field name="name">it.domain.mailbox.tree</field>
-			<field name="model">it.domain</field>
-			<field name="inherit_id" ref="it_domain.it_domain_tree" />
-			<field name="arch" type="xml">
-				<field name="customer" position="after">
-					<!-- <field name="mailbox_quota"/>
-					<field name="mailbox_max_quota"/> -->
-					<!-- <field name="number_of_mailbox"/>
-					<field name="number_of_alias"/> -->
-				</field>
-			</field>
+<odoo>
 
-		</record>
+    <record model="ir.ui.view" id="it_domain_tree">
+        <field name="name">it.domain.mailbox.tree</field>
+        <field name="model">it.domain</field>
+        <field name="inherit_id" ref="it_domain.it_domain_tree" />
+        <field name="arch" type="xml">
+            <field name="customer" position="after">
+                <!-- <field name="mailbox_quota"/>
+                <field name="mailbox_max_quota"/> -->
+                <!-- <field name="number_of_mailbox"/>
+                <field name="number_of_alias"/> -->
+            </field>
+        </field>
 
-		<record model="ir.ui.view" id="it_domain_form">
-			<field name="name">it.domain.mailbox.form</field>
-			<field name="model">it.domain</field>
-			<field name="inherit_id" ref="it_domain.it_domain_form"/>
-			<field name="arch" type="xml">
-				<div name="button_box" position="inside">
-					  <button class="oe_stat_button" name="open_mailboxes" type="object" icon="fa-envelope" id="open_mailboxes" attrs="{'invisible': [('has_mailbox', '=', False)]}">
-					  	<div class="o_form_field o_stat_info">
-					  		<span class="o_stat_value"><field name="number_of_mailbox" /></span>
-							<span class="o_stat_text">Mailboxes</span>
-					  	</div>
-					  </button>
-					  <button class="oe_stat_button" name="open_aliases" type="object" icon="fa-share" id="open_aliases" attrs="{'invisible': [('has_mailbox', '=', False)]}">
-					  	<div class="o_form_field o_stat_info">
-					  		<span class="o_stat_value"><field name="number_of_alias" /></span>
-							<span class="o_stat_text">Aliases</span>
-					  	</div>
-					  </button>
-					
-				</div>
-				<div class="oe_title" position="after">
-					<group name="options" position="inside">
-						<field name="has_mailbox"/>
-					</group>
-				</div>
+    </record>
 
-				<group name="contacts" position="inside">
-					<field name="mailbox_technical_contact" />
-				</group>
+    <record model="ir.ui.view" id="it_domain_form">
+        <field name="name">it.domain.mailbox.form</field>
+        <field name="model">it.domain</field>
+        <field name="inherit_id" ref="it_domain.it_domain_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                  <button class="oe_stat_button" name="open_mailboxes" type="object" icon="fa-envelope" id="open_mailboxes" attrs="{'invisible': [('has_mailbox', '=', False)]}">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value"><field name="number_of_mailbox" /></span>
+                        <span class="o_stat_text">Mailboxes</span>
+                    </div>
+                  </button>
+                  <button class="oe_stat_button" name="open_aliases" type="object" icon="fa-share" id="open_aliases" attrs="{'invisible': [('has_mailbox', '=', False)]}">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value"><field name="number_of_alias" /></span>
+                        <span class="o_stat_text">Aliases</span>
+                    </div>
+                  </button>
 
-				<notebook position="inside">
-					<page name="mailboxes" string="Mailboxes" attrs="{'invisible': [('has_mailbox', '=', False)]}">
-						<group>
-							<field name="max_mailbox"/>
-							<field name="mailbox_quota"/>
-							<field name="mailbox_max_quota"/>
-						</group>
-					</page>
-				</notebook>
-			</field>
-		</record>
+            </div>
+            <div class="oe_title" position="after">
+                <group name="options" position="inside">
+                    <field name="has_mailbox"/>
+                </group>
+            </div>
 
-		<record model="ir.ui.view" id="it_domain_search">
-			<field name="name">it.domain.mailbox.search</field>
-			<field name="model">it.domain</field>
-			<field name="inherit_id" ref="it_domain.it_domain_search" />
-			<field name="arch" type="xml">
-				<filter name="archived" position="after">
-					<filter name="has_mailbox" string="Has Mailbox" domain="[('has_mailbox', '!=', False)]"/>
-					<filter name="hasnt_mailbox" string="Don't have Mailbox" domain="[('has_mailbox', '=', False)]"/>
-				</filter>
-			</field>
-		</record>
+            <group name="contacts" position="inside">
+                <field name="mailbox_technical_contact" />
+            </group>
 
-	</data>
-</openerp>
+            <notebook position="inside">
+                <page name="mailboxes" string="Mailboxes" attrs="{'invisible': [('has_mailbox', '=', False)]}">
+                    <group>
+                        <field name="max_mailbox"/>
+                        <field name="mailbox_quota"/>
+                        <field name="mailbox_max_quota"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="it_domain_search">
+        <field name="name">it.domain.mailbox.search</field>
+        <field name="model">it.domain</field>
+        <field name="inherit_id" ref="it_domain.it_domain_search" />
+        <field name="arch" type="xml">
+            <filter name="archived" position="after">
+                <filter name="has_mailbox" string="Has Mailbox" domain="[('has_mailbox', '!=', False)]"/>
+                <filter name="hasnt_mailbox" string="Don't have Mailbox" domain="[('has_mailbox', '=', False)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

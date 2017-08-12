@@ -1,75 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-	<data>
-		<record model="ir.ui.view" id="it_mailbox_tree">
-			<field name="name">it.mailbox.tree</field>
-			<field name="model">it.mailbox</field>
-			<field name="arch" type="xml">
-			<tree string="Mailboxes" >
-				<field name="email"/>
-				<field name="name"/>
-				<field name="quota"/>
-			</tree>
-			</field>
-		</record>
+<odoo>
+    <record model="ir.ui.view" id="it_mailbox_tree">
+        <field name="name">it.mailbox.tree</field>
+        <field name="model">it.mailbox</field>
+        <field name="arch" type="xml">
+        <tree string="Mailboxes" >
+            <field name="email"/>
+            <field name="name"/>
+            <field name="quota"/>
+        </tree>
+        </field>
+    </record>
 
-		<record model="ir.ui.view" id="it_mailbox_form">
-			<field name="name">it.mailbox.form</field>
-			<field name="model">it.mailbox</field>
-			<field name="arch" type="xml">
-			<form string="Mailbox">
-				<sheet>
-					<div class="oe_button_box" name="button_box">
-						<!-- groups="base.group_no_one" -->
-						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                        	<field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
-                    	</button>
-					</div>
-					<div class="oe_title">
-						<h1>
-							<field name="name" default_focus="1" placeholder="Username" />
-						</h1>
-					</div>
-					<group>
-						<field name="email"/>
-						<field name="domain"/>
-						<field name="password"/>
-						<field name="quota"/>
-						<field name="quota_used"/>
-						<field name="number_of_emails"/>
-						<field name="description"/>
-					</group>
-				</sheet>
-			</form>
-			</field>
-		</record>
+    <record model="ir.ui.view" id="it_mailbox_form">
+        <field name="name">it.mailbox.form</field>
+        <field name="model">it.mailbox</field>
+        <field name="arch" type="xml">
+        <form string="Mailbox">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <!-- groups="base.group_no_one" -->
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                    </button>
+                </div>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" default_focus="1" placeholder="Username" />
+                    </h1>
+                </div>
+                <group>
+                    <field name="email"/>
+                    <field name="domain"/>
+                    <field name="password"/>
+                    <field name="quota"/>
+                    <field name="quota_used"/>
+                    <field name="number_of_emails"/>
+                    <field name="description"/>
+                </group>
+            </sheet>
+        </form>
+        </field>
+    </record>
 
-		<record model="ir.ui.view" id="it_mailbox_search">
-			<field name="name">it.mailbox.search</field>
-			<field name="model">it.mailbox</field>
-			<field name="arch" type="xml">
-				<search>
-					<field name="email"/>
-					<field name="name"/>
-					<field name="domain"/>
+    <record model="ir.ui.view" id="it_mailbox_search">
+        <field name="name">it.mailbox.search</field>
+        <field name="model">it.mailbox</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="email"/>
+                <field name="name"/>
+                <field name="domain"/>
 
-					<filter name="not-archived" string="Not Archived" domain="[('active', '=', True)]"/>
-					<filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
-				</search>
-			</field>
-		</record>
+                <filter name="not-archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
 
-		<record id="it_mailbox_action" model="ir.actions.act_window">
-			<field name="name">Mailboxes</field>
-			<field name="res_model">it.mailbox</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
-			<field name="help" type="html">
-			<p class="oe_view_nocontent_create">Create a new mailbox</p>
-			</field>
-		</record>
+    <record id="it_mailbox_action" model="ir.actions.act_window">
+        <field name="name">Mailboxes</field>
+        <field name="res_model">it.mailbox</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create a new mailbox</p>
+        </field>
+    </record>
 
-		<menuitem action="it_mailbox_action" id="it_menu_mailbox_mailbox" name="Mailboxes" parent="it_menu_mailbox" sequence="2"/>
+    <menuitem action="it_mailbox_action" id="it_menu_mailbox_mailbox" name="Mailboxes" parent="it_menu_mailbox" sequence="2"/>
 
-	</data>
-</openerp>
+</odoo>

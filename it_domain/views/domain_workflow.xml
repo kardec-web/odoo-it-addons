@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-  <data>
+<odoo>
     <record model="workflow" id="it_domain_automatic_workflow">
       <field name="name">it.domain.automatic.workflow</field>
       <field name="osv">it.domain</field>
@@ -25,7 +24,7 @@
       <field name="act_to" ref="active"/>
       <field name="signal">active</field>
     </record>
-    
+
     <record model="workflow.transition" id="it_domain_active_to_expired">
       <field name="act_from" ref="active"/>
       <field name="act_to" ref="expired"/>
@@ -44,6 +43,4 @@
       <field name="act_to" ref="expired"/>
       <field name="condition">is_expired</field>
     </record>
-
-  </data>
-</openerp>
+</odoo>

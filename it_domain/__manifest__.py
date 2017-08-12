@@ -22,12 +22,8 @@
 {
     'name': 'Domains',
     'category': 'Tools',
-    'summary': '',
-    'version': '1.0',
-    'licence': 'GPL-3',
-    'description': """
-        .
-        """,
+    'version': '10.0.0.1.0',
+    'license': 'GPL-3',
     'author': 'Kardec',
     'website': 'https://www.kardec.net',
     'depends': [

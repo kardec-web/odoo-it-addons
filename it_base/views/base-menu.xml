@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-	<data>
-		<menuitem id="main_it_menu" name="Infrastructure"/>
-		<menuitem id="it_menu_settings" name="Configuration" parent="main_it_menu"/>
-	</data>
-</openerp>
+<odoo>
+    <menuitem id="main_it_menu" name="Infrastructure"/>
+    <menuitem id="it_menu_settings" name="Configuration" parent="main_it_menu"/>
+</odoo>
