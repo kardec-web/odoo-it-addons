@@ -40,11 +40,23 @@ class InfrastructureDomain(models.Model):
         'res.partner', index=True)
 
     internal_note = fields.Text(string="Note")
+    system = fields.Boolean(
+        string="System", help="By exemple server domain", index=True)
 
     state = fields.Selection([
         ('active', 'Active'),
         ('expired', 'Expired')
     ], default="active")
+
+    dnsbelgium_url = fields.Char(
+        string="Dns Belgium", compute='_compute_dnsbelgium_url')
+
+    eurid_url = fields.Char(
+        string="Eurid", compute='_compute_eurid_url')
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Technical name already exists !"),
+    ]
 
     @api.multi
     def _compute_is_expired(self):
@@ -61,6 +73,18 @@ class InfrastructureDomain(models.Model):
     def action_expired(self):
         for record in self:
             record.state = 'expired'
+
+    @api.multi
+    def _compute_dnsbelgium_url(self):
+        for record in self:
+            record.dnsbelgium_url = u'https://www.dnsbelgium.be/fr/' + \
+                u'nom_de_domaine/disponibilité#/das/%s' % record.name
+
+    @api.multi
+    def _compute_eurid_url(self):
+        for record in self:
+            record.eurid_url = u'https://whois.eurid.eu/en/' + \
+                u'?domain=%s' % record.name
 
     @api.model
     def _needaction_domain_get(self):
