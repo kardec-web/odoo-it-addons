@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_server_tree" model="ir.ui.view">
+        <field name="name">it.server.tree</field>
+        <field name="model">it.server</field>
+        <field name="arch" type="xml">
+            <tree string="Servers" >
+                <field name="name"/>
+                <field name="domain_id"/>
+                <field name="technical_domain_id"/>
+                <field name="os"/>
+                <field name="server_type"/>
+                <field name="parent_id"/>
+                <field name="tag_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_server_form" model="ir.ui.view">
+        <field name="name">it.server.form</field>
+        <field name="model">it.server</field>
+        <field name="arch" type="xml">
+        <form string="Server">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                    </button>
+                </div>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" default_focus="1" placeholder="Technical name" />
+                    </h1>
+                </div>
+                <group>
+                    <field name="friendly_name"/>
+                    <field name="domain_id"/>
+                    <field name="os"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <field name="server_type"/>
+                    <field name="technical_domain_id" attrs="{'invisible': [('server_type', '!=', 'dedicated')]}"/>
+                    <field name="vm_id" attrs="{'invisible': [('server_type', '!=', 'virtual')]}"/>
+                    <field name="parent_id" attrs="{'invisible': [('server_type', '!=', 'virtual')]}"/>
+                </group>
+
+                <group>
+                    <field name="ip_ids">
+                        <tree string="Ips" editable="bottom">
+                            <field name="name"/>
+                            <field name="function"/>
+                        </tree>
+                    </field>
+                </group>
+
+                <notebook>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+        </field>
+    </record>
+
+    <record id="it_server_search" model="ir.ui.view">
+        <field name="name">it.server.search</field>
+        <field name="model">it.server</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="friendly_name"/>
+                <field name="parent_id"/>
+                <field name="server_type"/>
+                <field name="domain_id"/>
+                <field name="os"/>
+                <field name="technical_domain_id"/>
+                <field name="tag_ids"/>
+                <field name="ip_ids"/>
+
+                <filter name="it_server_not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="it_server_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <filter name="it_server_dedicated" string="Dedicated" domain="[('server_type', '=', 'dedicated')]"/>
+                <filter name="it_server_virtual" string="Virtual" domain="[('server_type', '=', 'virtual')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="it_server_action" model="ir.actions.act_window">
+        <field name="name">Servers</field>
+        <field name="res_model">it.server</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create a new Server</p>
+        </field>
+    </record>
+
+    <menuitem id="it_menu_main_server" name="Servers" parent="it_base.main_it_menu" sequence="3"/>
+    <menuitem action="it_server_action" id="it_menu_server" name="Servers" parent="it_menu_main_server"/>
+</odoo>

@@ -1,0 +1,7 @@
+"id","name","model_id/id","group_id/id","perm_read","perm_write","perm_create","perm_unlink"
+"it_server_manager","Server Administrator","model_it_server","it_base.it_admin",1,1,1,1
+"it_server_read_all","Server All","model_it_server",,1,0,0,0
+"it_server_tag_manager","Server Tag Administrator","model_it_server_tag","it_base.it_admin",1,1,1,1
+"it_server_tag_read_all","Server Tag All","model_it_server_tag",,1,0,0,0
+"it_server_ip_manager","Server IP Administrator","model_it_server_ip","it_base.it_admin",1,1,1,1
+"it_server_ip_read_all","Server IP All","model_it_server_ip",,1,0,0,0

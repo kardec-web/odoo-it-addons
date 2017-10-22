@@ -3,6 +3,5 @@
     <record id="it_mailboxes_admin" model="res.groups">
         <field name="name">Mailboxes Administrator</field>
         <field name="category_id" ref="it_base.module_category_it_infrastructure"/>
-        <field name="sequence">3</field>
     </record>
 </odoo>
