@@ -9,6 +9,7 @@
             <field name="email"/>
             <field name="domain"/>
             <field name="goto"/>
+            <field name="note"/>
             <field name="active"/>
         </tree>
         </field>
@@ -37,6 +38,7 @@
                     <field name="email"/>
                     <field name="domain"/>
                     <field name="goto"/>
+                    <field name="note"/>
                 </group>
             </sheet>
         </form>
@@ -53,8 +55,12 @@
                 <field name="domain"/>
                 <field name="goto"/>
 
-                <filter name="not-archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
                 <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+
+                <group expand="1" string="Group By">
+                      <filter string="Domain" name="it_mailbox_alias_domain" context="{'group_by':'domain'}"/>
+                </group>
             </search>
         </field>
     </record>

@@ -29,6 +29,7 @@ class InfrastructureMailboxAlias(models.Model):
     domain = fields.Many2one('it.domain', required=True)
     goto = fields.Char(string="Go To", required=True)
     active = fields.Boolean(default=True, index=True)
+    note = fields.Char()
 
     @api.multi
     @api.depends('name', 'domain.name')
