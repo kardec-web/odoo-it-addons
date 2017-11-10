@@ -20,5 +20,5 @@
 ##############################################################################
 import mailbox
 import alias
-import domain
+import it_domain
 import vacation

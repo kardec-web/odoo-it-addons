@@ -53,6 +53,18 @@
                 </group>
 
                 <notebook>
+                    <page string="Note">
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </page>
+                    <page string="Hardware">
+                        <group>
+                            <field name="cpu"/>
+                            <field name="memory"/>
+                            <field name="disk"/>
+                        </group>
+                    </page>
                 </notebook>
             </sheet>
             <div class="oe_chatter">
@@ -82,6 +94,10 @@
                 <filter name="it_server_archived" string="Archived" domain="[('active', '=', False)]"/>
                 <filter name="it_server_dedicated" string="Dedicated" domain="[('server_type', '=', 'dedicated')]"/>
                 <filter name="it_server_virtual" string="Virtual" domain="[('server_type', '=', 'virtual')]"/>
+
+                <group expand="1" string="Group By">
+                      <filter string="Parent" name="parent_id" context="{'group_by':'parent_id'}"/>
+                </group>
             </search>
         </field>
     </record>

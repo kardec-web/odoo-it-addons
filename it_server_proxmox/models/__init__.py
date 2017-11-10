@@ -18,22 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Servers',
-    'category': 'Tools',
-    'version': '10.0.0.1.0',
-    'license': 'GPL-3',
-    'author': 'Kardec',
-    'website': 'https://www.kardec.net',
-    'depends': [
-        'mail',
-        'it_base',
-        'it_domain',
-    ],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/it_server.xml',
-        'views/it_domain.xml',
-    ],
-    'application': False,
-}
+import it_server

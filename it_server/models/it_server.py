@@ -47,6 +47,12 @@ class InfrastructureServer(models.Model):
     ip_ids = fields.One2many(
         'it.server.ip', 'server_id', string="IPs")
 
+    note = fields.Html()
+
+    cpu = fields.Integer()
+    memory = fields.Integer(string="Memory (GB)")
+    disk = fields.Integer(string="Disk (GB)")
+
     @api.depends('domain_id')
     @api.multi
     def _compute_name(self):

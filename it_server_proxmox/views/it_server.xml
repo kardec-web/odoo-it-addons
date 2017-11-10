@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_server_form" model="ir.ui.view">
+        <field name="name">it.server.form</field>
+        <field name="model">it.server</field>
+        <field name="inherit_id" ref="it_server.it_server_form"/>
+        <field name="arch" type="xml">
+
+            <field name="domain_id" position="after">
+                <field name="has_proxmox_os" />
+            </field>
+
+            <notebook position="inside">
+                <page name="proxmox" string="Proxmox" attrs="{'invisible': [('has_proxmox_os', '=', False)]}">
+                    <group>
+                        <field name="proxmox_url" widget="url"/>
+                        <field name="proxmox_host"/>
+                        <field name="proxmox_port"/>
+                        <field name="proxmox_user"/>
+                        <field name="proxmox_password" password="True"/>
+                        <field name="proxmox_protocol"/>
+                        <field name="proxmox_vm_type"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="it_server_tree" model="ir.ui.view">
+        <field name="name">it.server.tree</field>
+        <field name="model">it.server</field>
+        <field name="inherit_id" ref="it_server.it_server_tree"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="has_proxmox_os"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="it_server_search" model="ir.ui.view">
+        <field name="name">it.server.search</field>
+        <field name="model">it.server</field>
+        <field name="inherit_id" ref="it_server.it_server_search"/>
+        <field name="arch" type="xml">
+            <field name="ip_ids" position="after">
+                <field name="has_proxmox_os"/>
+            </field>
+
+            <filter name="it_server_virtual" position="after">
+                <group expand="1" string="Group By">
+                      <filter string="Proxmox Server" name="proxmox_host" context="{'group_by':'proxmox_host'}"/>
+                </group>
+            </filter>
+
+        </field>
+    </record>
+</odoo>

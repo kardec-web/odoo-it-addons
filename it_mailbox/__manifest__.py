@@ -34,7 +34,7 @@
         'security/user_group.xml',
         'security/ir.model.access.csv',
         'views/base-menu.xml',
-        'views/domain.xml',
+        'views/it_domain.xml',
         'views/mailboxes.xml',
         'views/alias.xml',
         'views/vacation.xml',

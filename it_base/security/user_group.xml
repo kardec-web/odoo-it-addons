@@ -8,6 +8,5 @@
     <record id="it_admin" model="res.groups">
         <field name="name">Super Administrator</field>
         <field name="category_id" ref="module_category_it_infrastructure"/>
-        <field name="sequence">1</field>
     </record>
 </odoo>
