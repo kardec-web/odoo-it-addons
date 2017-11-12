@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -19,11 +18,47 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
+import os
+
+from fabric.api import task, local
 
 
-class ServerIp(models.Model):
+@task
+def lint():
+    lint_xml()
+    lint_flake8()
+    lint_odoo_lint()
 
-    _inherit = "it.server.ip"
 
-    server_id = fields.Many2one('it.server', required=True)
+@task
+def lint_flake8():
+    print('\033[1;32m• Flake8\033[1;m')
+    local("flake8 . --config=.flakerc")
+
+
+@task
+def lint_odoo_lint():
+    print('\033[1;32m• pyLinter\033[1;m')
+    addons = _get_odoo_addons()
+
+    disable = 'manifest-version-format,rst-syntax-error,missing-readme'
+    command = "pylint --load-plugins=pylint_odoo -d all -e odoolint" + \
+        " %s --disable=%s"
+
+    for addon in addons:
+        local(command % (addon, disable))
+
+
+@task
+def lint_xml():
+    print('\033[1;32m• XMl Linter\033[1;m')
+    local('find . -maxdepth 3 -type f -iname "*.xml" '
+          '| xargs -I \'{}\' xmllint -noout \'{}\'')
+
+
+def _get_odoo_addons():
+    addons = []
+    for item in os.listdir('.'):
+        if not os.path.isfile(item) and not item[0] == '.':
+            addons.append('./' + item)
+    return addons

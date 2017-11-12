@@ -26,4 +26,5 @@ class ServerIp(models.Model):
 
     _inherit = "it.server.ip"
 
-    server_id = fields.Many2one('it.server', required=True)
+    hosting_id = fields.Many2one(
+        'it.hosting', ondelete="cascade")

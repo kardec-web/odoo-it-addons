@@ -43,7 +43,9 @@
         <field name="inherit_id" ref="it_server.it_server_search"/>
         <field name="arch" type="xml">
             <field name="ip_ids" position="after">
-                <field name="has_proxmox_os"/>
+                <tree>
+                    <field name="has_proxmox_os"/>
+                </tree>
             </field>
 
             <filter name="it_server_virtual" position="after">

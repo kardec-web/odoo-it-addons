@@ -4,7 +4,7 @@
         <field name="name">it.server.tree</field>
         <field name="model">it.server</field>
         <field name="arch" type="xml">
-            <tree string="Servers" >
+            <tree>
                 <field name="name"/>
                 <field name="domain_id"/>
                 <field name="technical_domain_id"/>
@@ -45,7 +45,7 @@
 
                 <group>
                     <field name="ip_ids">
-                        <tree string="Ips" editable="bottom">
+                        <tree editable="bottom">
                             <field name="name"/>
                             <field name="function"/>
                         </tree>

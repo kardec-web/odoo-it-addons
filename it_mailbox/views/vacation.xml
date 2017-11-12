@@ -4,7 +4,7 @@
         <field name="name">it.mailbox.vacation.tree</field>
         <field name="model">it.mailbox.vacation</field>
         <field name="arch" type="xml">
-            <tree string="Vacations">
+            <tree>
                 <field name="name"/>
                 <field name="mailbox"/>
                 <field name="alias"/>

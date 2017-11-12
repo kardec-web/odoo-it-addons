@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="it_server_ip_tree" model="ir.ui.view">
+        <field name="name">it.server.ip.tree</field>
+        <field name="model">it.server.ip</field>
+        <field name="inherit_id" ref="it_base.it_server_ip_tree"/>
+        <field name="arch" type="xml">
+             <field name="function" position="after">
+                <field name="hosting_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="it_server_ip_form" model="ir.ui.view">
+        <field name="name">it.server.ip.form</field>
+        <field name="model">it.server.ip</field>
+        <field name="inherit_id" ref="it_base.it_server_ip_form"/>
+        <field name="arch" type="xml">
+            <group name="associations" position="inside">
+                <field name="hosting_id" />
+            </group>
+        </field>
+    </record>
+
+    <record id="it_server_ip_search" model="ir.ui.view">
+        <field name="name">it.server.ip.search</field>
+        <field name="model">it.server.ip</field>
+        <field name="inherit_id" ref="it_base.it_server_ip_search"/>
+        <field name="arch" type="xml">
+            <field name="function" position="after">
+                <field name="hosting_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

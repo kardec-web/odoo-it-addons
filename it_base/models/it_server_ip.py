@@ -24,6 +24,9 @@ from openerp import models, fields
 
 class ServerIp(models.Model):
 
-    _inherit = "it.server.ip"
+    _name = "it.server.ip"
 
-    server_id = fields.Many2one('it.server', required=True)
+    name = fields.Char('IP', required=True, index=True)
+    active = fields.Boolean(default=True, index=True)
+    function = fields.Char(
+        help="The name described how the IP is used")

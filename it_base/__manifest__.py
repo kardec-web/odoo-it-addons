@@ -30,7 +30,10 @@
     'depends': [],
     'data': [
         'views/base-menu.xml',
+        'views/it_link.xml',
+        'views/it_server_ip.xml',
         'security/user_group.xml',
+        'security/ir.model.access.csv',
     ],
     'application': True,
 }

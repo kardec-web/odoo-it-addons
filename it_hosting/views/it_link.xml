@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_link_form" model="ir.ui.view">
+        <field name="name">it.link.form</field>
+        <field name="model">it.link</field>
+        <field name="inherit_id" ref="it_base.it_link_form"/>
+        <field name="arch" type="xml">
+            <group name="associations" position="inside">
+                <field name="hosting_id" />
+            </group>
+        </field>
+    </record>
+
+    <record id="it_link_search" model="ir.ui.view">
+        <field name="name">it.link.search</field>
+        <field name="model">it.link</field>
+        <field name="inherit_id" ref="it_base.it_link_search"/>
+        <field name="arch" type="xml">
+            <field name="protocol" position="after">
+                <field name="hosting_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

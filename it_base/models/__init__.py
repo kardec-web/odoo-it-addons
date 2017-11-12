@@ -1,5 +1,3 @@
-
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Kardec
@@ -19,11 +17,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
-
-
-class ServerIp(models.Model):
-
-    _inherit = "it.server.ip"
-
-    server_id = fields.Many2one('it.server', required=True)
+import it_server_ip
+import it_link

@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <record model="ir.ui.view" id="it_domain_tree">
-        <field name="name">it.domain.mailbox.tree</field>
-        <field name="model">it.domain</field>
-        <field name="inherit_id" ref="it_domain.it_domain_tree" />
-        <field name="arch" type="xml">
-            <field name="customer" position="after">
-                <!-- <field name="mailbox_quota"/>
-                <field name="mailbox_max_quota"/> -->
-                <!-- <field name="number_of_mailbox"/>
-                <field name="number_of_alias"/> -->
-            </field>
-        </field>
-
-    </record>
-
     <record model="ir.ui.view" id="it_domain_form">
         <field name="name">it.domain.mailbox.form</field>
         <field name="model">it.domain</field>

@@ -18,16 +18,22 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from proxmoxer import ProxmoxAPI
-from proxmoxer.backends.https import AuthenticationError
-from proxmoxer.core import ResourceException
-from paramiko.ssh_exception import AuthenticationException
 from requests.exceptions import ConnectionError
 
-from openerp import models, fields, api
 import logging
 
+from openerp import models, fields, api
+
+
 _logger = logging.getLogger(__name__)
+
+try:
+    from proxmoxer import ProxmoxAPI
+    from proxmoxer.backends.https import AuthenticationError
+    from proxmoxer.core import ResourceException
+    from paramiko.ssh_exception import AuthenticationException
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class InfrastructureServer(models.Model):

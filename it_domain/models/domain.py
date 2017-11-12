@@ -40,8 +40,7 @@ class InfrastructureDomain(models.Model):
         'res.partner', index=True)
 
     internal_note = fields.Text(string="Note")
-    system = fields.Boolean(
-        string="System", help="By exemple server domain", index=True)
+    system = fields.Boolean(help="By exemple server domain", index=True)
 
     state = fields.Selection([
         ('active', 'Active'),

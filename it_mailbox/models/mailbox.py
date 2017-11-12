@@ -51,6 +51,7 @@ class InfrastructureMailbox(models.Model):
     @api.constrains('domain')
     def _check_max_mailboxes_limit(self):
         for record in self:
-            if record.domain.max_mailbox and record.domain.max_mailbox < len(record.domain.mailboxes):
+            if record.domain.max_mailbox and \
+                    record.domain.max_mailbox < len(record.domain.mailboxes):
                 raise ValidationError(
                     _('No more mailbox available for this domain.'))

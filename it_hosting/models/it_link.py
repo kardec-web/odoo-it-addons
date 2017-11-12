@@ -22,8 +22,9 @@
 from openerp import models, fields
 
 
-class ServerIp(models.Model):
+class Link(models.Model):
 
-    _inherit = "it.server.ip"
+    _inherit = "it.link"
 
-    server_id = fields.Many2one('it.server', required=True)
+    hosting_id = fields.Many2one(
+        'it.hosting', ondelete="cascade")

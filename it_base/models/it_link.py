@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -22,8 +21,19 @@
 from openerp import models, fields
 
 
-class ServerIp(models.Model):
+class Link(models.Model):
+    _name = "it.link"
 
-    _inherit = "it.server.ip"
+    name = fields.Char(required=True, index=True)
+    url = fields.Char(required=True, index=True)
+    active = fields.Boolean(default=True, index=True)
 
-    server_id = fields.Many2one('it.server', required=True)
+    protocol = fields.Selection([
+        ('ftp', 'FTP'),
+        ('http', 'HTTP'),
+        ('ssh', 'SSH'),
+    ], default='http', index=True)
+
+    hostname = fields.Char()
+    port = fields.Integer()
+    user = fields.Char()

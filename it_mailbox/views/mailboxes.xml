@@ -4,11 +4,11 @@
         <field name="name">it.mailbox.tree</field>
         <field name="model">it.mailbox</field>
         <field name="arch" type="xml">
-        <tree string="Mailboxes" >
-            <field name="email"/>
-            <field name="name"/>
-            <field name="quota"/>
-        </tree>
+            <tree>
+                <field name="email"/>
+                <field name="name"/>
+                <field name="quota"/>
+            </tree>
         </field>
     </record>
 

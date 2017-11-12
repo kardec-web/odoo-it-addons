@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -19,11 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
-
-
-class ServerIp(models.Model):
-
-    _inherit = "it.server.ip"
-
-    server_id = fields.Many2one('it.server', required=True)
+{
+    'name': 'It Hosting',
+    'category': 'Tools',
+    'version': '10.0.0.1.0',
+    'license': 'GPL-3',
+    'author': 'Kardec',
+    'website': 'https://www.kardec.net',
+    'depends': [
+        'it_base',
+        'it_domain',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/it_hosting.xml',
+        'views/it_domain.xml',
+        'views/it_server_ip.xml',
+        'views/it_link.xml',
+    ],
+    'application': True,
+}
