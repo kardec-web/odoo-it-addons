@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -18,22 +19,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, fields
 
-{
-    'name': 'Infrastructure',
-    'category': 'Tools',
-    'summary': '',
-    'version': '10.0.1.0.0',
-    'license': 'GPL-3',
-    'author': 'Kardec',
-    'website': 'https://www.kardec.net',
-    'depends': [],
-    'data': [
-        'views/base-menu.xml',
-        'views/it_link.xml',
-        'views/it_server_ip.xml',
-        'security/user_group.xml',
-        'security/ir.model.access.csv',
-    ],
-    'application': True,
-}
+
+class ServerIp(models.Model):
+
+    _name = "it.server.ip"
+
+    name = fields.Char('IP', required=True, index=True)
+    active = fields.Boolean(default=True, index=True)
+    function = fields.Char(
+        help="The name described how the IP is used")
