@@ -34,6 +34,7 @@
         'security/ir.model.access.csv',
         'views/it_server.xml',
         'views/it_domain.xml',
+        'views/it_link.xml',
     ],
     'application': False,
 }

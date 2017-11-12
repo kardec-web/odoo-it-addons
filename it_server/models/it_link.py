@@ -22,8 +22,8 @@
 from openerp import models, fields
 
 
-class ServerIp(models.Model):
+class Link(models.Model):
+    _inherit = "it.link"
 
-    _inherit = "it.server.ip"
-
-    server_id = fields.Many2one('it.server')
+    server_id = fields.Many2one(
+        'it.server', ondelete="cascade")

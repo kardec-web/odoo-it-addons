@@ -11,6 +11,7 @@
                 <field name="os"/>
                 <field name="server_type"/>
                 <field name="parent_id"/>
+                <field name="owner_id"/>
                 <field name="tag_ids" widget="many2many_tags"/>
             </tree>
         </field>
@@ -33,6 +34,7 @@
                     </h1>
                 </div>
                 <group>
+                    <field name="owner_id"/>
                     <field name="friendly_name"/>
                     <field name="domain_id"/>
                     <field name="os"/>
@@ -41,15 +43,6 @@
                     <field name="technical_domain_id" attrs="{'invisible': [('server_type', '!=', 'dedicated')]}"/>
                     <field name="vm_id" attrs="{'invisible': [('server_type', '!=', 'virtual')]}"/>
                     <field name="parent_id" attrs="{'invisible': [('server_type', '!=', 'virtual')]}"/>
-                </group>
-
-                <group>
-                    <field name="ip_ids">
-                        <tree editable="bottom">
-                            <field name="name"/>
-                            <field name="function"/>
-                        </tree>
-                    </field>
                 </group>
 
                 <notebook>
@@ -64,6 +57,20 @@
                             <field name="memory"/>
                             <field name="disk"/>
                         </group>
+                    </page>
+                    <page name="ips" string="IPs">
+                        <group>
+                            <field name="ip_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page name="links" string="Links">
+                        <tree>
+                            <field name="links_ids"/>
+                        </tree>
                     </page>
                 </notebook>
             </sheet>
@@ -89,6 +96,7 @@
                 <field name="technical_domain_id"/>
                 <field name="tag_ids"/>
                 <field name="ip_ids"/>
+                <field name="owner_id"/>
 
                 <filter name="it_server_not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
                 <filter name="it_server_archived" string="Archived" domain="[('active', '=', False)]"/>

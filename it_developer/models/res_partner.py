@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -22,8 +21,8 @@
 from openerp import models, fields
 
 
-class ServerIp(models.Model):
+class Partner(models.Model):
+    _inherit = "res.partner"
 
-    _inherit = "it.server.ip"
-
-    server_id = fields.Many2one('it.server')
+    is_developer = fields.Boolean()
+    ssh_keys = fields.Text(string="SSH keys")

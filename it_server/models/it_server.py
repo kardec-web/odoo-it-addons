@@ -39,7 +39,8 @@ class InfrastructureServer(models.Model):
     ], string='Type', required=True)
 
     parent_id = fields.Many2one(
-        'it.server', domain="[('server_type', '=', 'dedicated')]")
+        'it.server', string="Parent",
+        domain="[('server_type', '=', 'dedicated')]")
     tag_ids = fields.Many2many(
         'it.server.tag', 'server_tags_rel', 'server_id', 'tag_id',
         string='Tags')
@@ -52,6 +53,15 @@ class InfrastructureServer(models.Model):
     cpu = fields.Integer()
     memory = fields.Integer(string="Memory (GB)")
     disk = fields.Integer(string="Disk (GB)")
+    owner_id = fields.Many2one(
+        'res.partner', string="Owner", required=True,
+        default=lambda self: self._default_owner())
+    links_ids = fields.One2many(
+        'it.link', 'server_id', string="Links")
+
+    @api.model
+    def _default_owner(self):
+        return self.env.ref('base.main_company').id
 
     @api.depends('domain_id')
     @api.multi

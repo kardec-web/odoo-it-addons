@@ -68,7 +68,9 @@
                         </field>
                     </page>
                     <page name="links" string="Links">
-                        <field name="links_ids"/>
+                        <tree>
+                            <field name="links_ids"/>
+                        </tree>
                     </page>
                 </notebook>
             </sheet>
