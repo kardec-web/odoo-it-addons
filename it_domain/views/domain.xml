@@ -4,7 +4,7 @@
         <field name="name">it.domain.tree</field>
         <field name="model">it.domain</field>
         <field name="arch" type="xml">
-            <tree string="Domains" >
+            <tree>
                 <field name="name"/>
                 <field name="customer"/>
                 <field name="date_expiration"/>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" default_focus="1" placeholder="Domain" />
+                            <field name="name" widget="url" default_focus="1" placeholder="Domain" />
                         </h1>
                     </div>
 
@@ -88,6 +88,7 @@
 
                 <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
                 <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
                 <filter name="whithout_system" string="Whithout System" domain="[('system', '=', False)]"/>
                 <filter name="system" string="System" domain="[('system', '=', True)]"/>
             </search>
