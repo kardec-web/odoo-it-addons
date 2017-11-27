@@ -27,7 +27,9 @@
     'license': 'GPL-3',
     'author': 'Kardec',
     'website': 'https://www.kardec.net',
-    'depends': [],
+    'depends': [
+        'it_base',
+    ],
     'data': [
         'views/res_partner.xml',
     ],

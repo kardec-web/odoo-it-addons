@@ -25,4 +25,4 @@ class Partner(models.Model):
     _inherit = "res.partner"
 
     is_developer = fields.Boolean()
-    ssh_keys = fields.Text(string="SSH keys")
+    ssh_keys = fields.Many2many('it.ssh.key', string="SSH keys")

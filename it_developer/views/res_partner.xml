@@ -12,9 +12,9 @@
                 </field>
 
                 <notebook position="inside">
-                    <page name="developer" string="Develepor" attrs="{'invisible': [('is_developer', '=', False)]}">
+                    <page name="developer" string="Developer" attrs="{'invisible': [('is_developer', '=', False)]}">
                         <group>
-                            <field name="ssh_keys" />
+                            <field name="ssh_keys" context="{'default_name': email}" />
                         </group>
                     </page>
                 </notebook>
