@@ -100,13 +100,20 @@ class InfrastructureServer(models.Model):
         domain_env = self.env['it.domain'].sudo()
         server_ip_env = self.env['it.server.ip'].sudo()
 
+        active_domain = [
+            '|',
+            ('active', '=', True),
+            ('active', '=', False),
+        ]
+
         vm_domain = vm['name']
         domain = domain_env.search([
             ('name', '=', vm_domain)
         ])
         if domain:
-            server = server_env.search(
-                [('technical_domain_id', '=', domain.id)])
+            server = server_env.search([
+                ('technical_domain_id', '=', domain.id)
+            ] + active_domain)
 
         values = {
             'last_synchronisation': fields.Datetime.now(),
@@ -116,6 +123,7 @@ class InfrastructureServer(models.Model):
             'memory': vm['maxmem'] / 1024 / 1024 / 1024,
             'disk': vm['maxdisk'] / 1024 / 1024 / 1024,
             'parent_id': proxmox_server.id,
+            'active': vm['status'] == 'running',
         }
 
         if server:
