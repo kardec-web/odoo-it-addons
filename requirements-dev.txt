@@ -1,3 +1,4 @@
 flake8==3.5.0
 pylint-odoo==1.8.3.dev9
 Fabric==1.14.0
+coverage==4.4.2
