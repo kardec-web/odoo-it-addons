@@ -26,18 +26,21 @@ class InfrastructureServer(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Char(required=True, compute='_compute_name')
-    friendly_name = fields.Char()
-    os = fields.Char()
+    owner_id = fields.Many2one(
+        'res.partner', string="Owner", required=True,
+        default=lambda self: self._default_owner())
     domain_id = fields.Many2one('it.domain', string="Hostname", required=True)
-    technical_domain_id = fields.Many2one(
-        'it.domain', string="Technical (Hostname)")
-    active = fields.Boolean(default=True, index=True)
-    vm_id = fields.Char()
     server_type = fields.Selection([
         ('dedicated', 'Dedicated'),
         ('virtual', 'Virtual'),
     ], string='Type', required=True)
 
+    friendly_name = fields.Char()
+    os = fields.Char()
+    technical_domain_id = fields.Many2one(
+        'it.domain', string="Technical (Hostname)")
+    active = fields.Boolean(default=True, index=True)
+    vm_id = fields.Char()
     parent_id = fields.Many2one(
         'it.server', string="Parent",
         domain="[('server_type', '=', 'dedicated')]")
@@ -53,9 +56,7 @@ class InfrastructureServer(models.Model):
     cpu = fields.Integer()
     memory = fields.Integer(string="Memory (GB)")
     disk = fields.Integer(string="Disk (GB)")
-    owner_id = fields.Many2one(
-        'res.partner', string="Owner", required=True,
-        default=lambda self: self._default_owner())
+
     links_ids = fields.One2many(
         'it.link', 'server_id', string="Links")
 

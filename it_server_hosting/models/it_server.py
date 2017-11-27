@@ -22,12 +22,12 @@ from odoo import models, fields, api
 from odoo.tools.translate import _
 
 
-class InfrastructureDomain(models.Model):
-    _inherit = 'it.domain'
+class InfrastructureServer(models.Model):
+    _inherit = 'it.server'
 
-    hosting_ids = fields.One2many('it.hosting', 'domain_id')
-    hosting_id = fields.Many2one('it.hosting', ondelete="set null")
-    has_hosting = fields.Boolean()
+    hosting_ids = fields.One2many(
+        'it.hosting', 'server_id', string="Hostings")
+
     number_of_hosting = fields.Integer(compute="_compute_count_hosting")
 
     @api.multi
@@ -35,22 +35,23 @@ class InfrastructureDomain(models.Model):
         it_hosting_env = self.env['it.hosting']
         for record in self:
             if record.id:
-                record.number_of_hosting = it_hosting_env.search_count(
-                    [('domain_id', '=', record.id)])
+                record.number_of_hosting = it_hosting_env.search_count([
+                    ('server_id', '=', record.id)
+                ])
 
     @api.multi
     def open_hosting(self):
-        """ open hosting view """
+        """ open mailboxes view """
 
-        domain = self[0]
+        server = self[0]
         help = _(
             """<p class="oe_view_nocontent_create">Create a new hosting for
-              '%s'.</p>""") % (domain.name,)
+              '%s'.</p>""") % (server.name,)
 
         action = self.env.ref('it_hosting.it_hosting_action').read()[0]
         action['help'] = help
         action['context'] = {
-            'search_default_domain_id': [domain.id],
+            'search_default_server_id': [server.id],
         }
 
         return action

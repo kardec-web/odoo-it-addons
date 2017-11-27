@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -19,14 +18,32 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
+
+from odoo.tests.common import TransactionCase
 
 
-class ServerIp(models.Model):
+class TestItMailboxAlias(TransactionCase):
 
-    _name = "it.server.ip"
+    def setUp(self):
+        super(TestItMailboxAlias, self).setUp()
 
-    name = fields.Char('IP', required=True, index=True)
-    active = fields.Boolean(default=True, index=True)
-    function = fields.Char(
-        help="The name described how the IP is used")
+        self.users_env = self.env['res.users']
+        self.domain_env = self.env['it.domain']
+        self.mailbox_env = self.env['it.mailbox']
+        self.mailbox_alias_env = self.env['it.mailbox.alias']
+        self.group_user_id = self.ref('base.group_user')
+        self.group_it_admin_id = self.ref('it_base.it_admin')
+        self.main_company_id = self.ref('base.main_company')
+
+    def test_compute_display_name(self):
+        domain_1 = self.domain_env.create({
+            'name': 'domain-1.test',
+        })
+
+        alias_1 = self.mailbox_alias_env.create({
+            'name': 'user-1',
+            'goto': 'user-1@exemple.com',
+            'domain_id': domain_1.id,
+        })
+
+        self.assertEqual(alias_1.email, 'user-1@domain-1.test')

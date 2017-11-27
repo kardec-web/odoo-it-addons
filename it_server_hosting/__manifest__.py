@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -19,14 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
-
-
-class ServerIp(models.Model):
-
-    _name = "it.server.ip"
-
-    name = fields.Char('IP', required=True, index=True)
-    active = fields.Boolean(default=True, index=True)
-    function = fields.Char(
-        help="The name described how the IP is used")
+{
+    'name': 'Server on Hosting',
+    'category': 'Tools',
+    'version': '10.0.0.1.0',
+    'license': 'GPL-3',
+    'author': 'Kardec',
+    'website': 'https://www.kardec.net',
+    'depends': [
+        'it_server',
+        'it_hosting',
+    ],
+    'data': [
+        'views/it_server.xml',
+        'views/it_hosting.xml',
+    ],
+    'auto_install': True,
+}

@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -22,11 +21,7 @@
 from odoo import models, fields
 
 
-class ServerIp(models.Model):
+class InfrastructureHosting(models.Model):
+    _inherit = 'it.hosting'
 
-    _name = "it.server.ip"
-
-    name = fields.Char('IP', required=True, index=True)
-    active = fields.Boolean(default=True, index=True)
-    function = fields.Char(
-        help="The name described how the IP is used")
+    server_id = fields.Many2one('it.server')

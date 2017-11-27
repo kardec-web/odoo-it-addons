@@ -61,7 +61,7 @@ class InfrastructureDomain(models.Model):
     def _compute_is_expired(self):
         for record in self:
             record.is_expired = fields.Date.from_string(
-                record.toDate) < datetime.date.today()
+                record.date_expiration) <= datetime.date.today()
 
     @api.multi
     def action_active(self):

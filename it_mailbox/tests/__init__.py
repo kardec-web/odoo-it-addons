@@ -1,5 +1,3 @@
-
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Kardec
@@ -19,14 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
-
-
-class ServerIp(models.Model):
-
-    _name = "it.server.ip"
-
-    name = fields.Char('IP', required=True, index=True)
-    active = fields.Boolean(default=True, index=True)
-    function = fields.Char(
-        help="The name described how the IP is used")
+from . import test_it_domain
+from . import test_it_mailbox
+from . import test_it_mailbox_alias
+from . import test_it_mailbox_vacation

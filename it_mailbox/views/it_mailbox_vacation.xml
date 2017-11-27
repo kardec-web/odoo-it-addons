@@ -6,8 +6,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="mailbox"/>
-                <field name="alias"/>
+                <field name="mailbox_id"/>
+                <field name="alias_id"/>
                 <field name="state"/>
                 <field name="active_from"/>
                 <field name="active_until"/>
@@ -29,10 +29,10 @@
                 </div>
                 <group>
                     <field name="state"/>
-                    <field name="domain"/>
+                    <field name="domain_id"/>
                     <field name="from_mailbox"/>
-                    <field name="mailbox" attrs="{'invisible': [('from_mailbox', '=', False)]}" options="{'no_quick_create':True,'create_edi':False}"/>
-                    <field name="alias" attrs="{'invisible': [('from_mailbox', '=', True)]}" options="{'no_quick_create':True,'create_edi':False}"/>
+                    <field name="mailbox_id" attrs="{'invisible': [('from_mailbox', '=', False)]}" options="{'no_quick_create':True,'create_edi':False}"/>
+                    <field name="alias_id" attrs="{'invisible': [('from_mailbox', '=', True)]}" options="{'no_quick_create':True,'create_edi':False}"/>
                     <field name="active_from"/>
                     <field name="active_until"/>
                     <field name="body"/>
@@ -48,8 +48,8 @@
         <field name="arch" type="xml">
             <search>
                 <field name="state"/>
-                <field name="mailbox"/>
-                <field name="alias"/>
+                <field name="mailbox_id"/>
+                <field name="alias_id"/>
                 <field name="active_from"/>
                 <field name="active_until"/>
 

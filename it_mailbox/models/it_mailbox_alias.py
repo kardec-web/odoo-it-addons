@@ -21,31 +21,20 @@
 from openerp import models, fields, api
 
 
-class OVHVacation(models.Model):
-    _name = 'it.mailbox.vacation'
+class InfrastructureMailboxAlias(models.Model):
+    _name = 'it.mailbox.alias'
 
-    name = fields.Char(string="Subject")
+    email = fields.Char(string='From', compute='_compute_display_name')
+    name = fields.Char(string="Alias", required=True)
+    domain_id = fields.Many2one('it.domain', required=True)
+    goto = fields.Char(string="Go To", required=True)
+
     active = fields.Boolean(default=True, index=True)
-    state = fields.Selection([
-        ('pending', 'Pending'),
-        ('active', 'Active'),
-        ('expired', 'Expired'),
-    ])
-    domain = fields.Many2one('it.domain', required=True)
-    # If not from_mailbox, the vacation is for an alias
-    from_mailbox = fields.Boolean(
-        string="From mailbox ?", default=True)
-    mailbox = fields.Many2one('it.mailbox')
-    alias = fields.Many2one('it.mailbox.alias')
+    note = fields.Char()
 
-    active_from = fields.Datetime()
-    active_until = fields.Datetime()
-
-    body = fields.Html()
-
-    @api.onchange('domain', 'from_mailbox')
-    def domain_changed(self):
-        return {'domain': {
-            'mailbox': [('domain', '=', self.domain.id)],
-            'alias': [('domain', '=', self.domain.id)]
-        }}
+    @api.multi
+    @api.depends('name', 'domain_id.name')
+    def _compute_display_name(self):
+        for record in self:
+            if record.name and record.domain_id:
+                record.email = record.name + '@' + record.domain_id.name

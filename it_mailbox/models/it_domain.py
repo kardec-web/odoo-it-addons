@@ -25,9 +25,9 @@ from openerp.tools.translate import _
 class InfrastructureDomain(models.Model):
     _inherit = 'it.domain'
 
-    mailboxes = fields.One2many('it.mailbox', 'domain')
-    alias = fields.One2many(
-        'it.mailbox.alias', 'domain', string="Mailbox Alias")
+    mailbox_ids = fields.One2many('it.mailbox', 'domain_id')
+    alias_ids = fields.One2many(
+        'it.mailbox.alias', 'domain_id', string="Mailbox Alias")
 
     has_mailbox = fields.Boolean()
     mailbox_quota = fields.Integer(string="Quota")
@@ -36,7 +36,7 @@ class InfrastructureDomain(models.Model):
     number_of_mailbox = fields.Integer(compute="_compute_count_mailbox")
     number_of_alias = fields.Integer(compute="_compute_count_alias")
 
-    mailbox_technical_contact = fields.Many2one(
+    mailbox_technical_contact_id = fields.Many2one(
         'res.partner', string="Technical Contact (Mailbox)", index=True)
 
     @api.multi
@@ -44,7 +44,7 @@ class InfrastructureDomain(models.Model):
         for record in self:
             if record.id:
                 record.number_of_mailbox = record.env[
-                    'it.mailbox'].search_count([('domain', '=', record.id)])
+                    'it.mailbox'].search_count([('domain_id', '=', record.id)])
 
     @api.multi
     def _compute_count_alias(self):
@@ -52,7 +52,7 @@ class InfrastructureDomain(models.Model):
         for record in self:
             if record.id:
                 record.number_of_alias = alias_env.search_count([
-                    ('domain', '=', record.id)
+                    ('domain_id', '=', record.id)
                 ])
 
     @api.multi
@@ -67,7 +67,7 @@ class InfrastructureDomain(models.Model):
         action = self.env.ref('it_mailbox.it_mailbox_action').read()[0]
         action['help'] = help
         action['context'] = {
-            'search_default_domain': [domain.id],
+            'search_default_domain_id': [domain.id],
         }
 
         return action
@@ -84,7 +84,7 @@ class InfrastructureDomain(models.Model):
         action = self.env.ref('it_mailbox.it_mailbox_alias_action').read()[0]
         action['help'] = help
         action['context'] = {
-            'search_default_domain': [domain.id],
+            'search_default_domain_id': [domain.id],
         }
 
         return action

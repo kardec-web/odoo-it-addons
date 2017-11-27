@@ -28,7 +28,7 @@ class InfrastructureMailbox(models.Model):
     email = fields.Char(
         string='E-mail', compute='_compute_display_name')
     name = fields.Char(string="Username", required=True, index=True)
-    domain = fields.Many2one('it.domain', required=True)
+    domain_id = fields.Many2one('it.domain', required=True)
 
     description = fields.Text()
     active = fields.Boolean(default=True, index=True)
@@ -41,17 +41,18 @@ class InfrastructureMailbox(models.Model):
     number_of_emails = fields.Integer(string="Number of message in mailbox")
 
     @api.multi
-    @api.depends('name', 'domain.name')
+    @api.depends('name', 'domain_id.name')
     def _compute_display_name(self):
         for record in self:
-            if record.name and record.domain:
-                record.email = record.name + '@' + record.domain.name
+            if record.name and record.domain_id:
+                record.email = record.name + '@' + record.domain_id.name
 
     @api.multi
-    @api.constrains('domain')
+    @api.constrains('domain_id')
     def _check_max_mailboxes_limit(self):
         for record in self:
-            if record.domain.max_mailbox and \
-                    record.domain.max_mailbox < len(record.domain.mailboxes):
+            if record.domain_id.max_mailbox and \
+                    record.domain_id.max_mailbox < \
+                    len(record.domain_id.mailbox_ids):
                 raise ValidationError(
                     _('No more mailbox available for this domain.'))

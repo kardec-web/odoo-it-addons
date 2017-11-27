@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="it_mailbox_alias_tree" model="ir.ui.view">
-        <field name="name">it.mailbox.alias.tree</field>
-        <field name="model">it.mailbox.alias</field>
+    <record model="ir.ui.view" id="it_mailbox_tree">
+        <field name="name">it.mailbox.tree</field>
+        <field name="model">it.mailbox</field>
         <field name="arch" type="xml">
-            <tree editable="top" >
-                <field name="name"/>
+            <tree>
                 <field name="email"/>
-                <field name="domain"/>
-                <field name="goto"/>
-                <field name="note"/>
-                <field name="active"/>
+                <field name="name"/>
+                <field name="quota"/>
             </tree>
         </field>
     </record>
 
-
-    <record id="it_mailbox_alias_form" model="ir.ui.view">
-        <field name="name">it.mailbox.alias.form</field>
-        <field name="model">it.mailbox.alias</field>
+    <record model="ir.ui.view" id="it_mailbox_form">
+        <field name="name">it.mailbox.form</field>
+        <field name="model">it.mailbox</field>
         <field name="arch" type="xml">
         <form string="Mailbox">
             <sheet>
@@ -30,50 +26,52 @@
                 </div>
                 <div class="oe_title">
                     <h1>
-                        <field name="name" default_focus="1" placeholder="Alias" />
+                        <field name="name" default_focus="1" placeholder="Username" />
                     </h1>
                 </div>
                 <group>
                     <field name="email"/>
-                    <field name="domain"/>
-                    <field name="goto"/>
-                    <field name="note"/>
+                    <field name="domain_id"/>
+                    <field name="password"/>
+                    <field name="quota"/>
+                    <field name="quota_used"/>
+                    <field name="number_of_emails"/>
+                    <field name="description"/>
                 </group>
             </sheet>
         </form>
         </field>
     </record>
 
-    <record id="it_mailbox_alias_search" model="ir.ui.view">
-        <field name="name">it.mailbox.alias.search</field>
-        <field name="model">it.mailbox.alias</field>
+    <record model="ir.ui.view" id="it_mailbox_search">
+        <field name="name">it.mailbox.search</field>
+        <field name="model">it.mailbox</field>
         <field name="arch" type="xml">
             <search>
                 <field name="email"/>
                 <field name="name"/>
-                <field name="domain"/>
-                <field name="goto"/>
+                <field name="domain_id"/>
 
                 <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
                 <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
 
                 <group expand="1" string="Group By">
-                      <filter string="Domain" name="it_mailbox_alias_domain" context="{'group_by':'domain'}"/>
+                      <filter string="Domain" name="it_mailbox_domain" context="{'group_by':'domain_id'}"/>
                 </group>
             </search>
         </field>
     </record>
 
-    <record id="it_mailbox_alias_action" model="ir.actions.act_window">
-        <field name="name">Mailbox alias</field>
-        <field name="res_model">it.mailbox.alias</field>
+    <record id="it_mailbox_action" model="ir.actions.act_window">
+        <field name="name">Mailboxes</field>
+        <field name="res_model">it.mailbox</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-        <p class="oe_view_nocontent_create">Create a new alias</p>
+        <p class="oe_view_nocontent_create">Create a new mailbox</p>
         </field>
     </record>
 
-    <menuitem action="it_mailbox_alias_action" id="it_menu_mailbox_alias" name="Alias" parent="it_menu_mailbox" sequence="3"/>
+    <menuitem action="it_mailbox_action" id="it_menu_mailbox_mailbox" name="Mailboxes" parent="it_menu_mailbox" sequence="2"/>
 
 </odoo>

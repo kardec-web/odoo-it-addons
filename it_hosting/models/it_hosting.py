@@ -53,8 +53,12 @@ class InfrastructureHosting(models.Model):
     links_ids = fields.One2many(
         'it.link', 'hosting_id', string="Links")
 
-    api.multi
+    environment = fields.Selection([
+        ('development', 'Development'),
+        ('production', 'Production'),
+    ])
 
+    @api.multi
     def write(self, values):
         server_ip_env = self.env['it.server.ip']
         links_env = self.env['it.link']

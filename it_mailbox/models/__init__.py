@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import mailbox
-import alias
+import it_mailbox
+import it_mailbox_alias
 import it_domain
-import vacation
+import it_mailbox_vacation

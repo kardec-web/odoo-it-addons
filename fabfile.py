@@ -56,6 +56,15 @@ def lint_xml():
           '| xargs -I \'{}\' xmllint -noout \'{}\'')
 
 
+@task
+def unittest():
+    database = 'test_it'
+    addons = _get_odoo_addons()
+    "coverage run ./odoo/odoo-bin -c odoo.conf -d %s" % database
+    " --test-enable --log-level=error --log-handler=odoo.modules.loading:INFO"
+    " --stop-after-init -i %s && coverage report -i" % addons.split(",")
+
+
 def _get_odoo_addons():
     addons = []
     for item in os.listdir('.'):

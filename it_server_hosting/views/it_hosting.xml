@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="it_hosting_form" model="ir.ui.view">
+        <field name="name">it.hosting.form</field>
+        <field name="model">it.hosting</field>
+        <field name="inherit_id" ref="it_hosting.it_hosting_form" />
+        <field name="arch" type="xml">
+
+            <field name="environment" position="after">
+                <field name="server_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="it_hosting_search" model="ir.ui.view">
+        <field name="name">it.hosting.search</field>
+        <field name="model">it.hosting</field>
+        <field name="inherit_id" ref="it_hosting.it_hosting_search" />
+        <field name="arch" type="xml">
+            <field name="os" position="after">
+                <field name="server_id"/>
+            </field>
+
+            <group position="inside">
+                <filter string="Server" name="server_id" context="{'group_by':'server_id'}"/>
+            </group>
+        </field>
+    </record>
+</odoo>

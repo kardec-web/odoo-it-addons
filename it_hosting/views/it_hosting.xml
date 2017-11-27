@@ -4,10 +4,12 @@
         <field name="name">it.hosting.tree</field>
         <field name="model">it.hosting</field>
         <field name="arch" type="xml">
-            <field name="name"/>
-            <field name="date_expiration"/>
-            <field name="domain_id"/>
-            <field name="hosting_type"/>
+            <tree>
+                <field name="name"/>
+                <field name="date_expiration"/>
+                <field name="domain_id"/>
+                <field name="hosting_type"/>
+            </tree>
         </field>
     </record>
 
@@ -37,6 +39,7 @@
                     <field name="hosting_type"/>
                     <field name="resource_type"/>
                     <field name="os"/>
+                    <field name="environment"/>
                 </group>
 
                 <notebook>
