@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -22,11 +21,10 @@
 from odoo import models, fields
 
 
-class ServerIp(models.Model):
+class SSHKey(models.Model):
 
-    _name = "it.server.ip"
+    _name = "it.ssh.key"
 
-    name = fields.Char('IP', required=True, index=True)
+    name = fields.Char(required=True, index=True)
     active = fields.Boolean(default=True, index=True)
-    function = fields.Char(
-        help="The name described how the IP is used")
+    key = fields.Text()
