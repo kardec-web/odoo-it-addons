@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="customer"/>
+                <field name="customer_id"/>
                 <field name="date_expiration"/>
             </tree>
         </field>
@@ -56,8 +56,8 @@
                             </div>
 
                             <group name="contacts">
-                                <field name="customer"/>
-                                <field name="technical_contact" />
+                                <field name="customer_id"/>
+                                <field name="technical_contact_id" />
                             </group>
                         </page>
                         <page name="whois" string="Whois">
@@ -84,7 +84,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="customer"/>
+                <field name="customer_id"/>
 
                 <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
                 <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>

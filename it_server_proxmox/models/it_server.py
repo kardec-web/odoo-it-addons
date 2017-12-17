@@ -70,7 +70,7 @@ class InfrastructureServer(models.Model):
             ('proxmox_vm_type', '!=', False),
         ])
 
-        _logger.info("%d vms to fetch", len(servers))
+        _logger.info("%d server(s) of vms to fetch", len(servers))
 
         for proxmox in servers:
             proxmox_api = self._get_proxmox_api(proxmox)
@@ -90,6 +90,7 @@ class InfrastructureServer(models.Model):
                     vms += self._get_lxc_vm(proxmox_api, node)
 
                 for vm in vms:
+                    _logger.info("Fetching %s" % vm['name'])
                     self._create_vm(vm, proxmox)
 
         _logger.info("Fetching proxmox VMs finished")

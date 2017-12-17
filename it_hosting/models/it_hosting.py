@@ -31,7 +31,7 @@ class InfrastructureHosting(models.Model):
     hosting_type = fields.Selection([
         ('web', 'Web'),
     ], string='Type', required=True, index=True, default='web')
-
+    partner_id = fields.Many2one('res.partner', string="Customer", index=True)
     note = fields.Html()
     disk_size = fields.Integer(string="Disk size (GB)")
     os = fields.Char()

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Kardec
@@ -17,7 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import it_server_ip
-import it_link
-import it_ssh_key
-import it_estimate_cost
+from odoo import models, fields
+
+
+class EstimateCost(models.Model):
+    _inherit = 'it.estimate.cost'
+
+    server_id = fields.Many2one('it.server')

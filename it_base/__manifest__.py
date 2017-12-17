@@ -33,6 +33,7 @@
         'views/it_link.xml',
         'views/it_server_ip.xml',
         'views/it_ssh_key.xml',
+        'views/estimate_cost.xml',
         'security/user_group.xml',
         'security/ir.model.access.csv',
     ],

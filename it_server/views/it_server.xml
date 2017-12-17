@@ -46,6 +46,20 @@
                 </group>
 
                 <notebook>
+                    <page name="contact" string="Contact">
+                        <div class="alert alert-info" style="margin-top:25px;" role="alert">
+                            You can specify here some contacts informations:
+                            <ul>
+                                <li>Customer</li>
+                                <li>Technical contact of the customer</li>
+                            </ul>
+                        </div>
+
+                        <group name="contacts">
+                            <field name="customer_id"/>
+                            <field name="technical_contact_id" />
+                        </group>
+                    </page>
                     <page string="Note">
                         <group>
                             <field name="note"/>
@@ -63,13 +77,14 @@
                             <field name="ip_ids">
                                 <tree editable="bottom">
                                     <field name="name"/>
+                                    <field name="function"/>
                                 </tree>
                             </field>
                         </group>
                     </page>
                     <page name="links" string="Links">
                         <tree>
-                            <field name="links_ids"/>
+                            <field name="links_ids" context="{'default_server_id': active_id}"/>
                         </tree>
                     </page>
                 </notebook>

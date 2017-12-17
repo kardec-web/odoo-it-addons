@@ -25,7 +25,8 @@ class InfrastructureServer(models.Model):
     _name = 'it.server'
     _inherit = ['mail.thread']
 
-    name = fields.Char(required=True, compute='_compute_name')
+    name = fields.Char(compute='_compute_name',
+                       store=True, index=True)
     owner_id = fields.Many2one(
         'res.partner', string="Owner", required=True,
         default=lambda self: self._default_owner())
@@ -60,11 +61,19 @@ class InfrastructureServer(models.Model):
     links_ids = fields.One2many(
         'it.link', 'server_id', string="Links")
 
+    customer_id = fields.Many2one('res.partner', string="Customer",
+                                  domain="[('customer', '=', True)]",
+                                  context="{'default_customer':1}")
+
+    technical_contact_id = fields.Many2one(
+        'res.partner',
+        string="Technical Contact", index=True)
+
     @api.model
     def _default_owner(self):
         return self.env.ref('base.main_company').id
 
-    @api.depends('domain_id')
+    @api.depends('domain_id', 'friendly_name')
     @api.multi
     def _compute_name(self):
         for server in self:

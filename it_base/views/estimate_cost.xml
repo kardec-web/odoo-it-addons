@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_estimate_cost_tree" model="ir.ui.view">
+        <field name="name">it.estimate.cost.tree</field>
+        <field name="model">it.estimate.cost</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="estimate_cost"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="it_estimate_cost_form" model="ir.ui.view">
+        <field name="name">it.estimate.cost.form</field>
+        <field name="model">it.estimate.cost</field>
+        <field name="arch" type="xml">
+            <form string="Estimate Cost">
+                <sheet editable="bottom">
+                    <group>
+                        <field name="name" default_focus="1"/>
+                        <field name="estimate_cost"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="it_estimate_cost_search" model="ir.ui.view">
+        <field name="name">it.estimate.cost.search</field>
+        <field name="model">it.estimate.cost</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="it_estimate_cost_action" model="ir.actions.act_window">
+        <field name="name">Estimate Cost</field>
+        <field name="res_model">it.estimate.cost</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create a new key</p>
+        </field>
+    </record>
+
+    <menuitem groups="base.group_no_one" action="it_estimate_cost_action" id="it_menu_estimate_cost" name="Estimate Cost" parent="it_menu_settings"/>
+</odoo>

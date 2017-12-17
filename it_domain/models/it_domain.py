@@ -28,16 +28,17 @@ class InfrastructureDomain(models.Model):
 
     name = fields.Char(string="Domain", required=True, index=True)
     description = fields.Text()
-    customer = fields.Many2one('res.partner',
-                               domain="[('customer', '=', True)]",
-                               context="{'default_customer':1}")
+    customer_id = fields.Many2one('res.partner',
+                                  string="Customer",
+                                  domain="[('customer', '=', True)]",
+                                  context="{'default_customer':1}")
     date_expiration = fields.Date(string="Expiration Date")
     is_expired = fields.Boolean(compute='_compute_is_expired')
 
     active = fields.Boolean(default=True, index=True)
 
-    technical_contact = fields.Many2one(
-        'res.partner', index=True)
+    technical_contact_id = fields.Many2one(
+        'res.partner', index=True, string="Technical Contact")
 
     internal_note = fields.Text(string="Note")
     system = fields.Boolean(help="By exemple server domain", index=True)

@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -19,27 +18,31 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import ipaddress
-
 from odoo import models, fields, api
 
 
-class ServerIp(models.Model):
+class InfrastructureServer(models.Model):
+    _inherit = 'it.server'
 
-    _name = "it.server.ip"
+    @api.model
+    def _default_currency(self):
+        return self.env.user.company_id.currency_id
 
-    name = fields.Char('IP', required=True, index=True)
-    active = fields.Boolean(default=True, index=True)
-    function = fields.Char(
-        help="The name described how the IP is used")
-    is_private = fields.Boolean(compute="_compute_is_private", store=True)
+    estimate_cost_ids = fields.One2many(
+        'it.estimate.cost', 'server_id', string="Estimate Cost(s)")
+
+    estimate_cost_total = fields.Monetary(
+        compute="_compute_estimate_cost_total", default=0, store=True)
+    currency_id = fields.Many2one(
+        'res.currency', string='Currency',
+        required=True, readonly=True,
+        default=_default_currency,
+        track_visibility='always')
 
     @api.multi
-    @api.depends('name')
-    def _compute_is_private(self):
+    @api.depends('estimate_cost_ids')
+    def _compute_estimate_cost_total(self):
         for record in self:
-            try:
-                record.is_private = ipaddress.ip_address(
-                    record.name.split("/")[0]).is_private
-            except ValueError:
-                record.is_private = False
+            if record.estimate_cost_ids:
+                for estimate_cost in record.estimate_cost_ids:
+                    record.estimate_cost_total += estimate_cost.estimate_cost
