@@ -27,4 +27,4 @@ class SSHKey(models.Model):
 
     name = fields.Char(required=True, index=True)
     active = fields.Boolean(default=True, index=True)
-    key = fields.Text()
+    key = fields.Text(required=True,)

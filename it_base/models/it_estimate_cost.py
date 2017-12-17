@@ -18,24 +18,22 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from odoo import models, fields, api
 
-{
-    'name': 'Infrastructure',
-    'category': 'Tools',
-    'summary': '',
-    'version': '10.0.1.0.0',
-    'license': 'GPL-3',
-    'author': 'Kardec',
-    'website': 'https://www.kardec.net',
-    'depends': [],
-    'data': [
-        'views/base-menu.xml',
-        'views/it_link.xml',
-        'views/it_server_ip.xml',
-        'views/it_ssh_key.xml',
-        'views/estimate_cost.xml',
-        'security/user_group.xml',
-        'security/ir.model.access.csv',
-    ],
-    'application': True,
-}
+
+class EstimateCost(models.Model):
+    _name = "it.estimate.cost"
+    _order = "estimate_cost"
+
+    @api.model
+    def _default_currency(self):
+        return self.env.user.company_id.currency_id
+
+    name = fields.Char(required=True, index=True)
+    estimate_cost = fields.Monetary(
+        'Estimate Cost', currency_field='currency_id')
+    currency_id = fields.Many2one(
+        'res.currency', string='Currency',
+        required=True, readonly=True,
+        default=_default_currency,
+        track_visibility='always')

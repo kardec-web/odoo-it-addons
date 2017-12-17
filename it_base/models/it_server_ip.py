@@ -19,7 +19,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
+import ipaddress
+
+from odoo import models, fields, api
 
 
 class ServerIp(models.Model):
@@ -30,3 +32,14 @@ class ServerIp(models.Model):
     active = fields.Boolean(default=True, index=True)
     function = fields.Char(
         help="The name described how the IP is used")
+    is_private = fields.Boolean(compute="_compute_is_private", store=True)
+
+    @api.multi
+    @api.depends('name')
+    def _compute_is_private(self):
+        for record in self:
+            try:
+                record.is_private = ipaddress.ip_address(
+                    record.name.split("/")[0]).is_private
+            except ValueError:
+                record.is_private = False

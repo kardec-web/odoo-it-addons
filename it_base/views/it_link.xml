@@ -72,5 +72,5 @@
         </field>
     </record>
 
-    <menuitem action="it_link_action" id="it_menu_link" name="Links" parent="it_menu_settings"/>
+    <menuitem groups="base.group_no_one" action="it_link_action" id="it_menu_link" name="Links" parent="it_menu_settings"/>
 </odoo>
