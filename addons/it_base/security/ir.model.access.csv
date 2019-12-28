@@ -1,0 +1,9 @@
+"id","name","model_id/id","group_id/id","perm_read","perm_write","perm_create","perm_unlink"
+"it_ip_manager","Server IP Administrator","model_it_ip","it_base.it_admin",1,1,1,1
+"it_ip_read_all","Server IP All","model_it_ip",,1,0,0,0
+"it_link_manager","Server Link Administrator","model_it_link","it_base.it_admin",1,1,1,1
+"it_link_read_all","Server Link All","model_it_link",,1,0,0,0
+"it_ssh_key_manager","SSH KEY Administrator","model_it_ssh_key","it_base.it_admin",1,1,1,1
+"it_ssh_key_read_all","SSH KEY All","model_it_ssh_key",,1,0,0,0
+"it_estimate_cost_manager","Estimate Cost Administrator","model_it_estimate_cost","it_base.it_admin",1,1,1,1
+"it_estimate_cost_read_all","Estimate Cost All","model_it_estimate_cost",,1,0,0,0

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_ip_tree" model="ir.ui.view">
+        <field name="name">it.ip.tree</field>
+        <field name="model">it.ip</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ip"/>
+                <field name="function"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="it_ip_form" model="ir.ui.view">
+        <field name="name">it.ip.form</field>
+        <field name="model">it.ip</field>
+        <field name="arch" type="xml">
+            <form string="IP">
+                <header>
+                    <button name="toggle_active" string="Restore" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" string="Archive" attrs="{'invisible': [('active', '=', False)]}" />
+                    </div>
+                    <group>
+                        <field name="ip" default_focus="1"/>
+                        <field name="function"/>
+                        <field name="is_private"/>
+                    </group>
+
+                    <group name="associations">
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="it_ip_search" model="ir.ui.view">
+        <field name="name">it.ip.search</field>
+        <field name="model">it.ip</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="is_private" string="Private" domain="[('is_private', '=', True)]"/>
+                <filter name="is_public" string="Public" domain="[('is_private', '=', False)]"/>
+
+                <field name="ip"/>
+                <field name="function"/>
+                <field name="is_private"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="it_ip_action" model="ir.actions.act_window">
+        <field name="name">ip</field>
+        <field name="res_model">it.ip</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_is_public":1}</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create a new ip</p>
+        </field>
+    </record>
+
+    <menuitem action="it_ip_action" id="it_menu_ip" name="IPs" parent="it_menu_settings"/>
+</odoo>
