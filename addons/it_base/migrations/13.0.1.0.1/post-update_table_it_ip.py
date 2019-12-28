@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Kardec
@@ -18,24 +17,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+#
 
-{
-    'name': 'Infrastructure',
-    'category': 'Tools',
-    'summary': '',
-    'version': '10.0.1.0.0',
-    'license': 'GPL-3',
-    'author': 'Kardec',
-    'website': 'https://www.kardec.net',
-    'depends': [],
-    'data': [
-        'views/base-menu.xml',
-        'views/it_link.xml',
-        'views/it_server_ip.xml',
-        'views/it_ssh_key.xml',
-        'views/estimate_cost.xml',
-        'security/user_group.xml',
-        'security/ir.model.access.csv',
-    ],
-    'application': True,
-}
+
+def migrate(cr, version):
+    # Migrate ip column "name" to "ip"
+    cr.execute('UPDATE it_ip SET ip=name')
+    cr.execute('ALTER TABLE it_ip DROP COLUMN name')

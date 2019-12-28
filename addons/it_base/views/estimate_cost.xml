@@ -11,13 +11,21 @@
         </field>
     </record>
 
-
     <record id="it_estimate_cost_form" model="ir.ui.view">
         <field name="name">it.estimate.cost.form</field>
         <field name="model">it.estimate.cost</field>
         <field name="arch" type="xml">
             <form string="Estimate Cost">
-                <sheet editable="bottom">
+                <header>
+                    <button name="toggle_active" string="Restore" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" string="Archive" attrs="{'invisible': [('active', '=', False)]}" />
+                    </div>
                     <group>
                         <field name="name" default_focus="1"/>
                         <field name="estimate_cost"/>
@@ -33,6 +41,8 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
+                <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
             </search>
         </field>
     </record>
@@ -40,10 +50,9 @@
     <record id="it_estimate_cost_action" model="ir.actions.act_window">
         <field name="name">Estimate Cost</field>
         <field name="res_model">it.estimate.cost</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-        <p class="oe_view_nocontent_create">Create a new key</p>
+        <p class="oe_view_nocontent_create">Create a new estimate cost</p>
         </field>
     </record>
 

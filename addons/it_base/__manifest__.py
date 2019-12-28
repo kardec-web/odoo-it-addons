@@ -18,4 +18,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import models
+
+{
+    'name': 'Infrastructure',
+    'category': 'Tools',
+    'summary': '',
+    'version': '13.0.1.0.1',
+    'license': 'GPL-3',
+    'author': 'Jérémy Hermand',
+    'website': 'https://www.jhermand.net',
+    'depends': [],
+    'data': [
+        'views/base-menu.xml',
+        'views/it_link.xml',
+        'views/it_ip.xml',
+        'views/it_ssh_key.xml',
+        'views/estimate_cost.xml',
+        'security/user_group.xml',
+        'security/ir.model.access.csv',
+    ],
+    'application': True,
+}

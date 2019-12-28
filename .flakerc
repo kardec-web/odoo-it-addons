@@ -4,5 +4,5 @@
 # [EXT-37]Ignore complexity(C901) and list comprehension error(F812)
 ignore = E123,E133,E226,E241,E242,F811,C901,F812
 max-line-length = 79
-exclude = __unported__,env,.git,env/odoo,addons-community,__init__.py,script
+exclude = __unported__,env,.git,env/odoo,addons-community,__init__.py,script,tasks.py
 max-complexity = 10

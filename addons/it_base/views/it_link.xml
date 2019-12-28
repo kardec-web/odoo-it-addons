@@ -16,12 +16,15 @@
         <field name="model">it.link</field>
         <field name="arch" type="xml">
             <form string="Link">
+                <header>
+                    <button name="toggle_active" string="Restore" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <!-- groups="base.group_no_one" -->
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
-                        </button>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" string="Archive" attrs="{'invisible': [('active', '=', False)]}" />
                     </div>
                     <group>
                         <field name="name" default_focus="1"/>
@@ -65,7 +68,6 @@
     <record id="it_link_action" model="ir.actions.act_window">
         <field name="name">link</field>
         <field name="res_model">it.link</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
         <p class="oe_view_nocontent_create">Create a new link</p>

@@ -18,22 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api
+from odoo import fields, models
 
 
-class EstimateCost(models.Model):
-    _name = "it.estimate.cost"
-    _order = "estimate_cost"
+class SSHKey(models.Model):
 
-    @api.model
-    def _default_currency(self):
-        return self.env.user.company_id.currency_id
+    _name = "it.ssh.key"
+    _description = "Infrastructure SSH Key"
 
     name = fields.Char(required=True, index=True)
-    estimate_cost = fields.Monetary(
-        'Estimate Cost', currency_field='currency_id')
-    currency_id = fields.Many2one(
-        'res.currency', string='Currency',
-        required=True, readonly=True,
-        default=_default_currency,
-        track_visibility='always')
+    active = fields.Boolean(default=True, index=True)
+    key = fields.Text(required=True,)

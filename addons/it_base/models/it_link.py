@@ -18,13 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
+from odoo import fields, models
 
 
-class SSHKey(models.Model):
-
-    _name = "it.ssh.key"
+class Link(models.Model):
+    _name = "it.link"
+    _description = "Infrastructure Link"
 
     name = fields.Char(required=True, index=True)
+    url = fields.Char(required=True, index=True)
     active = fields.Boolean(default=True, index=True)
-    key = fields.Text(required=True,)
+
+    protocol = fields.Selection([
+        ('ftp', 'FTP'),
+        ('http', 'HTTP'),
+        ('ssh', 'SSH'),
+    ], default='http', index=True)
+
+    hostname = fields.Char()
+    port = fields.Integer()
+    user = fields.Char()

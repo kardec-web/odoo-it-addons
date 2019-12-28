@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Kardec
@@ -17,7 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import it_server_ip
-import it_link
-import it_ssh_key
-import it_estimate_cost
+from odoo import api, fields, models
+
+
+class EstimateCost(models.Model):
+    _name = "it.estimate.cost"
+    _order = "estimate_cost"
+    _description = "Infrastructure Estimate Cost"
+
+    @api.model
+    def _default_currency(self):
+        return self.env.user.company_id.currency_id
+
+    name = fields.Char(required=True, index=True)
+    active = fields.Boolean(default=True, index=True)
+    estimate_cost = fields.Monetary(currency_field='currency_id')
+    currency_id = fields.Many2one(
+        'res.currency', string='Currency',
+        required=True, readonly=True,
+        default=_default_currency,
+        track_visibility='always')

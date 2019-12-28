@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -18,22 +19,34 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields
+import ipaddress
+
+from odoo import api, fields, models
 
 
-class Link(models.Model):
-    _name = "it.link"
+class ServerIp(models.Model):
 
-    name = fields.Char(required=True, index=True)
-    url = fields.Char(required=True, index=True)
+    _name = "it.ip"
+    _rec_name = "ip"
+    _description = "Infrastructure IP"
+
+    ip = fields.Char('IP', required=True, index=True)
     active = fields.Boolean(default=True, index=True)
+    function = fields.Char(
+        help="Described how the IP is used")
+    is_private = fields.Boolean(compute="_compute_is_private", store=True)
 
-    protocol = fields.Selection([
-        ('ftp', 'FTP'),
-        ('http', 'HTTP'),
-        ('ssh', 'SSH'),
-    ], default='http', index=True)
+    @api.depends('ip')
+    def _compute_is_private(self):
+        # No coverage because the field is required but when we
+        # create an new ip by the web interface Odoo throw an error.
+        for record in self:  # pragma: no cover
+            if not record.ip:
+                record.is_private = False
+                continue
 
-    hostname = fields.Char()
-    port = fields.Integer()
-    user = fields.Char()
+            try:
+                record.is_private = ipaddress.ip_address(
+                    record.ip.split("/")[0]).is_private
+            except ValueError:
+                record.is_private = False
