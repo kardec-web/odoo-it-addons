@@ -18,4 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import models
+
+{
+    'name': 'It Developer',
+    'category': 'Tools',
+    'summary': '',
+    'version': '13.0.1.0.0',
+    'license': 'GPL-3',
+    'author': 'Jérémy Hermand',
+    'website': 'https://www.jhermand.net',
+    'depends': [
+        'it_base',
+    ],
+    'data': [
+        'views/res_partner.xml',
+    ],
+    'application': False,
+}

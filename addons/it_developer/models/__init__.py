@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Kardec
@@ -18,20 +17,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{
-    'name': 'It Developer',
-    'category': 'Tools',
-    'summary': '',
-    'version': '10.0.1.0.0',
-    'license': 'GPL-3',
-    'author': 'Kardec',
-    'website': 'https://www.kardec.net',
-    'depends': [
-        'it_base',
-    ],
-    'data': [
-        'views/res_partner.xml',
-    ],
-    'application': True,
-}
+from . import res_partner
