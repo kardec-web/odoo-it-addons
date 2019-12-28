@@ -341,7 +341,7 @@ import_name_whitelist=odoo,openerp,PIL,anybox.testing.openerp,argparse,babel,dat
 jslintrc=/usr/local/lib/python2.7/dist-packages/pylint_odoo/examples/.jslintrc
 
 # Name of author required in manifest file.
-manifest_required_author=Kardec
+manifest_required_author=Jérémy Hermand
 
 # List of keys required in manifest file, separated by a comma.
 manifest_required_keys=license

@@ -1,3 +1,6 @@
-flake8==3.7.9
+flake8==3.7.7
+flake8-print==3.1.0
 pylint-odoo==3.0.3
-coverage==5.0.1
+coverage==4.5.2
+colorama==0.4.1
+selenium==3.141.0

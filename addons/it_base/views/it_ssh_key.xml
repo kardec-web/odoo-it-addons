@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_ssh_key_tree" model="ir.ui.view">
+        <field name="name">it.ssh.key.tree</field>
+        <field name="model">it.ssh.key</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="it_ssh_key_form" model="ir.ui.view">
+        <field name="name">it.ssh.key.form</field>
+        <field name="model">it.ssh.key</field>
+        <field name="arch" type="xml">
+            <form string="SSH Key">
+                <header>
+                    <button name="toggle_active" string="Restore" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" string="Archive" attrs="{'invisible': [('active', '=', False)]}" />
+                    </div>
+                    <group>
+                        <field name="name" default_focus="1"/>
+                        <field name="key"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="it_ssh_key_search" model="ir.ui.view">
+        <field name="name">it.ssh.key.search</field>
+        <field name="model">it.ssh.key</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="it_ssh_key_action" model="ir.actions.act_window">
+        <field name="name">SSH key(s)</field>
+        <field name="res_model">it.ssh.key</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create a new key</p>
+        </field>
+    </record>
+
+    <menuitem action="it_ssh_key_action" id="it_menu_ssh_key" name="SSH Keys" parent="it_menu_settings"/>
+</odoo>

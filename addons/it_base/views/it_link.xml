@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="it_link_tree" model="ir.ui.view">
+        <field name="name">it.link.tree</field>
+        <field name="model">it.link</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="url"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="it_link_form" model="ir.ui.view">
+        <field name="name">it.link.form</field>
+        <field name="model">it.link</field>
+        <field name="arch" type="xml">
+            <form string="Link">
+                <header>
+                    <button name="toggle_active" string="Restore" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" string="Archive" attrs="{'invisible': [('active', '=', False)]}" />
+                    </div>
+                    <group>
+                        <field name="name" default_focus="1"/>
+                        <field name="url" widget="url"/>
+                        <field name="protocol"/>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('protocol', '!=', 'ssh')]}">
+                        <field name="hostname"/>
+                        <field name="user"/>
+                        <field name="port"/>
+                    </group>
+
+                    <group name="associations">
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="it_link_search" model="ir.ui.view">
+        <field name="name">it.link.search</field>
+        <field name="model">it.link</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="ssh" string="SSH" domain="[('protocol', '=', 'ssh')]"/>
+                <filter name="http" string="HTTP" domain="[('protocol', '=', 'http')]"/>
+                <filter name="ftp" string="FTP" domain="[('protocol', '=', 'ftp')]"/>
+
+                <field name="name"/>
+                <field name="url"/>
+                <field name="protocol"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="it_link_action" model="ir.actions.act_window">
+        <field name="name">link</field>
+        <field name="res_model">it.link</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create a new link</p>
+        </field>
+    </record>
+
+    <menuitem groups="base.group_no_one" action="it_link_action" id="it_menu_link" name="Links" parent="it_menu_settings"/>
+</odoo>
