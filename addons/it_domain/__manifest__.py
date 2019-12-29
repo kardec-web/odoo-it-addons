@@ -18,4 +18,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import models
+
+{
+    'name': 'Domains',
+    'category': 'Tools',
+    'version': '13.0.0.1.0',
+    'license': 'GPL-3',
+    'author': 'Jérémy Hermand',
+    'website': 'https://www.jhermand.net',
+    'depends': [
+        'mail',
+        'it_base'
+    ],
+    'data': [
+        'security/user_group.xml',
+        'security/ir.model.access.csv',
+        'views/domain.xml',
+        'data/mail_template_data.xml',
+        # 'views/domain_workflow.xml',
+    ],
+    'application': False,
+}

@@ -8,6 +8,7 @@
                 <field name="name"/>
                 <field name="customer_id"/>
                 <field name="date_expiration"/>
+                <field name="certificate_expire_on"/>
             </tree>
         </field>
     </record>
@@ -18,14 +19,15 @@
         <field name="arch" type="xml">
             <form string="Domain">
                 <header>
-                    <field name="state" widget="statusbar"/>
+                    <button name="toggle_active" string="Restore" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <button name="action_verify_ssl_validity" string="Get Certificate Data" type="object" attrs="{'invisible': [('verify_certificate_validity', '=', False)]}"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <!-- groups="base.group_no_one" -->
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
-                        </button>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" string="Archive" attrs="{'invisible': [('active', '=', False)]}" />
                     </div>
                     <div class="oe_title">
                         <h1>
@@ -33,7 +35,9 @@
                         </h1>
                     </div>
 
-                    <group name="options" />
+                    <group name="options" >
+                        <field name="verify_certificate_validity" />
+                    </group>
 
                     <group name="fields">
                         <field name="date_expiration"/>
@@ -56,8 +60,16 @@
                             </div>
 
                             <group name="contacts">
-                                <field name="customer_id"/>
-                                <field name="technical_contact_id" />
+                                <field name="customer_id" context="{'res_partner_search_mode': 'customer'}"/>
+                                <field name="technical_contact_id" context="{'res_partner_search_mode': 'customer'}"/>
+                            </group>
+                        </page>
+                        <page name="certificate" string="Certificate">
+                            <group>
+                                <field name="certificate_expire_on" string="Expire On"/>
+                                <field name="certificate_ocsp" string="OCSP"/>
+                                <field name="certificate_generate_by" string="Generate By"/>
+                                <field name="is_certificate_expired" string="Expired ?"/>
                             </group>
                         </page>
                         <page name="whois" string="Whois">
@@ -71,7 +83,8 @@
                 </sheet>
 
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_follower_ids" widget="mail_followers" help="Follow this domain to automatically track expiration of the certificate SSL." groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
             </form>
@@ -84,13 +97,15 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="customer_id"/>
+                <field name="customer_id" />
 
                 <filter name="not_archived" string="Not Archived" domain="[('active', '=', True)]"/>
                 <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
                 <separator/>
                 <filter name="whithout_system" string="Whithout System" domain="[('system', '=', False)]"/>
                 <filter name="system" string="System" domain="[('system', '=', True)]"/>
+                <separator/>
+                <filter name="is_certificate_expired" string="Certificate To Renew" domain="[('is_certificate_expired', '=', True)]"/>
             </search>
         </field>
     </record>
@@ -98,7 +113,6 @@
     <record model="ir.actions.act_window" id="it_domain_action">
         <field name="name">Domaines</field>
         <field name="res_model">it.domain</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{"search_default_whithout_system":1}</field>
         <field name="help" type="html">

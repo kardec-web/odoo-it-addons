@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <record id="email_template_domain_expired" model="mail.template">
+        <field name="name">Domain Name: Certificate expired</field>
+        <field name="model_id" ref="it_domain.model_it_domain"/>
+        <field name="email_from">${(user.email_formatted) |safe}</field>
+        <field name="subject">Certificate Expiration</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+<p style="margin: 0px; padding: 0px; font-size: 13px;">
+    The certificate of the domain ${object.name} is expired.
+</p>
+</div>
+        </field>
+        <field name="lang">${user.partner_id.lang}</field>
+        <field name="user_signature" eval="False"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>
